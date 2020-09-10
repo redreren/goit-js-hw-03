@@ -58,8 +58,9 @@ const account = {
     this.transactions.push(transaction);
     if (this.balance >= amount) {
       return (this.balance -= amount);
+    } else {
+      return "не достаточно средств";
     }
-    return "не достаточно средств";
   },
 
   /*
@@ -87,30 +88,25 @@ const account = {
    * определенного типа транзакции из всей истории транзакций
    */
   getTransactionTotal(type) {
+    let total = 0;
     for (let obj of this.transactions) {
       for (let key in obj) {
-        if (obj[key] === type) {
-          return obj;
+        if (obj[key] === `${type}`) {
+          total += obj.amount;
         }
       }
     }
+    return total;
   },
 };
-console.log(account.createTransaction(500, Transaction.DEPOSIT, 0));
-console.log(account.deposit(400));
-console.log(account.balance);
-console.log(account.deposit(500));
-console.log(account.balance);
-console.log(account.withdraw(300));
-console.log(account.balance);
-console.log(account.withdraw(1000));
-console.log(account.balance);
-console.log(account.getBalance());
-console.log(account.transactions);
-console.log(account.getTransactionDetails(1));
-console.log(account.getTransactionDetails(2));
-console.log(account.getTransactionDetails(3));
-console.log(account.getTransactionDetails(4));
-console.log(account.getTransactionDetails(5));
-console.log(account.getTransactionTotal(Transaction.DEPOSIT));
-console.log(account.getTransactionTotal(Transaction.WITHDRAW));
+// console.log(account.createTransaction(500, Transaction.DEPOSIT, 0));
+// console.log(account.deposit(400));
+// console.log(account.balance);
+// console.log(account.withdraw(300));
+// console.log(account.balance);
+// console.log(account.withdraw(1000));
+// console.log(account.balance);
+// console.log(account.getBalance());
+// console.log(account.transactions);
+// console.log(account.getTransactionDetails(1));
+// console.log(account.getTransactionTotal(Transaction.WITHDRAW));
